@@ -8,7 +8,7 @@ import axios from 'axios' ;
 import Moment from 'react-moment';
 import NumberFormat from 'react-number-format';
 import Columns from 'react-columns';
-import virus from '../components/virus.png'
+
 
 
 
@@ -17,6 +17,11 @@ import virus from '../components/virus.png'
 
 
 const Cards = () => {
+
+  
+
+
+
 
   const [Latest ,setLatest] = useState([]);
   const [Result ,setResult] = useState([]);
@@ -104,13 +109,7 @@ if ( Loading)
 {
   return (
     <div>
-      <br/>
-      
-      <h2 style={{ textAlign : "center"}}>Covid-19 Tracker</h2>
-
-
-      <br/>
-
+   
         <CardDeck>
   <Card 
     bg="secondary" 
@@ -211,21 +210,15 @@ if ( Loading)
 
 
 
+
+
   
   
   
     
   return (
     <div>
-      <div style={{textAlign:"center"}}>
-      <br/>
-      <img src={virus} alt="virus" style={{width:"130px" , height:"130px" , 
-       } }/>
-      <h1 style={{ textAlign : "center"}}>Covid-19 Tracker</h1>
-
-
-      <br/>
-      </div>
+     
 
         <CardDeck>
   <Card 
