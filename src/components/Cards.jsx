@@ -6,7 +6,10 @@ import Form from 'react-bootstrap/Form'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios' ;
 import Moment from 'react-moment';
+import NumberFormat from 'react-number-format';
 import Columns from 'react-columns';
+import virus from '../components/virus.png'
+
 
 
 
@@ -18,12 +21,16 @@ const Cards = () => {
   const [Latest ,setLatest] = useState([]);
   const [Result ,setResult] = useState([]);
   const [SearchCountries ,setSearchCountries] = useState("");
+  const [Loading , setLoading] = useState(false);
+
+
 
 
 
 
   
   useEffect(() => {
+    setLoading(true)
     axios
     .all([
     axios.get("https://corona.lmao.ninja/v2/all"),
@@ -33,6 +40,7 @@ const Cards = () => {
     .then( resArr => {
       setLatest(resArr[0].data);
       setResult(resArr[1].data);
+      setLoading(false)
     })
     .catch( err => {
       console.log(err)
@@ -90,11 +98,19 @@ var queries = [{
 }];
 
 
-  
-  
-  
+const LoadingS = "Loading...";
+
+if ( Loading)
+{
   return (
     <div>
+      <br/>
+      
+      <h2 style={{ textAlign : "center"}}>Covid-19 Tracker</h2>
+
+
+      <br/>
+
         <CardDeck>
   <Card 
     bg="secondary" 
@@ -105,7 +121,7 @@ var queries = [{
     <Card.Body>
       <Card.Title>Total Cases</Card.Title>
       <Card.Text>
-      {Latest.cases}
+      {LoadingS}
       </Card.Text>
     </Card.Body>
     <Card.Footer>
@@ -125,7 +141,7 @@ var queries = [{
     <Card.Body>
       <Card.Title>Total Deaths</Card.Title>
       <Card.Text>
-       {Latest.deaths}
+      {LoadingS}
       </Card.Text>
     </Card.Body>
     <Card.Footer>
@@ -144,7 +160,125 @@ var queries = [{
     <Card.Body>
       <Card.Title>Total Recovered</Card.Title>
       <Card.Text>
-      {Latest.recovered}
+      {LoadingS}
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+    <small>Last Updated-
+ <Moment format="DD/MM/YYYY">
+           {lastUpdated}
+            </Moment>
+            </small>
+    </Card.Footer>
+  </Card>
+</CardDeck>
+<Form>
+  <Form.Group controlId="formGroupSearch" >
+    <Form.Control 
+    type="text"
+    placeholder="Search Country Here"
+    onChange={e=> setSearchCountries(e.target.value)}
+    />
+  </Form.Group>
+</Form>
+
+
+
+<CardColumns queries={queries}> {countries}</CardColumns>
+
+    </div>
+  )
+;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+    
+  return (
+    <div>
+      <div style={{textAlign:"center"}}>
+      <br/>
+      <img src={virus} alt="virus" style={{width:"130px" , height:"130px" , 
+       } }/>
+      <h1 style={{ textAlign : "center"}}>Covid-19 Tracker</h1>
+
+
+      <br/>
+      </div>
+
+        <CardDeck>
+  <Card 
+    bg="secondary" 
+    text="white"
+    className="text-center"
+    style={{margin:"10px"}}
+    >
+    <Card.Body>
+      <Card.Title>Total Cases</Card.Title>
+      <Card.Text style={{fontSize:"30px"}}>
+      <NumberFormat value={Latest.cases} displayType={'text'} thousandSeparator={true} />
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+  <small>Last Updated-
+ <Moment format="DD/MM/YYYY">
+           {lastUpdated}
+            </Moment>
+            </small>
+    </Card.Footer>
+  </Card>
+  <Card 
+    bg="danger" 
+     text="white"
+    className="text-center"
+    style={{margin:"10px"}}
+    >
+    <Card.Body>
+      <Card.Title>Total Deaths</Card.Title>
+      <Card.Text style={{fontSize:"30px"}}>
+      <NumberFormat value={Latest.deaths} displayType={'text'} thousandSeparator={true} />
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+    <small>Last Updated-
+ <Moment format="DD/MM/YYYY">
+           {lastUpdated}
+            </Moment>
+            </small>    </Card.Footer>
+  </Card>
+  <Card
+   bg="success" 
+   text="white" 
+   className="text-center"
+   style={{margin:"10px"}}
+   >
+    <Card.Body>
+      <Card.Title>Total Recovered</Card.Title>
+      <Card.Text style={{fontSize:"30px"}}>
+      <NumberFormat value= {Latest.recovered} displayType={'text'} thousandSeparator={true} />
+
+      
       </Card.Text>
     </Card.Body>
     <Card.Footer>
