@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios' ;
 import Moment from 'react-moment';
 import NumberFormat from 'react-number-format';
-import Columns from 'react-columns';
+// import Columns from 'react-columns';
 
 
 

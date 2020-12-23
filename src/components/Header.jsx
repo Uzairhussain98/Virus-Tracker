@@ -5,7 +5,7 @@ import virus from '../components/virus.png'
 
 const Header = () => {
 
-    const { ref, playState , getAnimation} = useWebAnimations({
+    const { ref, } = useWebAnimations({
         keyframes: [
           { transform: 'rotate(0)' } ,
           { transform: 'rotate(360deg)' }
